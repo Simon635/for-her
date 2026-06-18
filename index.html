@@ -9,16 +9,6 @@
 	<link
 		href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400&display=swap"
 		rel="stylesheet">
-	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
-		<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-			<circle cx='50' cy='50' r='48' fill='black'/>
-			<text x='50' y='56'
-						text-anchor='middle'
-						dominant-baseline='middle'
-						font-size='54'
-						fill='%23c9a75c'
-						font-family='Arial, sans-serif'>♪</text>
-		</svg>">
 
 	<style>
 		* {
@@ -27,44 +17,30 @@
 			box-sizing: border-box;
 		}
 
-		body {
-			min-height: 100vh;
-			color: #f5f5f5;
-			font-family: 'Inter', sans-serif;
-			background:
-				radial-gradient(circle at top, rgba(201, 167, 92, 0.12), transparent 45%),
-				#090909;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			padding: 30px;
-			overflow: hidden;
-		}
-
-		/* ===== INTRO ===== */
+		/* ================= INTRO ================= */
 		.intro {
 			position: fixed;
 			inset: 0;
-			background: #000;
+			background: #070605;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			z-index: 999;
-			animation: introFade 3.2s ease forwards;
+			animation: introFade 3s ease forwards;
 		}
 
 		.intro h1 {
 			font-family: 'Cormorant Garamond', serif;
-			font-size: 60px;
+			font-size: 58px;
 			font-weight: 300;
-			letter-spacing: 5px;
-			color: #c9a75c;
+			color: #d4af6e;
+			letter-spacing: 6px;
 			opacity: 0;
 			transform: scale(1.2);
-			animation: kiraIn 1.2s ease forwards;
+			animation: fadeIn 1.2s ease forwards;
 		}
 
-		@keyframes kiraIn {
+		@keyframes fadeIn {
 			to {
 				opacity: 1;
 				transform: scale(1);
@@ -86,38 +62,60 @@
 			}
 		}
 
-		/* ===== BACKGROUND GLOW ===== */
+		/* ================= MAIN THEME ================= */
+
+		body {
+			min-height: 100vh;
+			font-family: 'Inter', sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 30px;
+			overflow: hidden;
+
+			color: #f5f1e8;
+
+			background:
+				radial-gradient(circle at top, rgba(212, 175, 110, 0.10), transparent 45%),
+				radial-gradient(circle at bottom, rgba(60, 40, 30, 0.6), transparent 60%),
+				#0b0a08;
+		}
+
+		/* мягкий свет */
 		body::before {
 			content: "";
 			position: fixed;
-			inset: -50%;
-			background: radial-gradient(circle, rgba(201, 167, 92, 0.12), transparent 60%);
-			animation: moveGlow 14s ease-in-out infinite;
+			inset: -40%;
+			background: radial-gradient(circle, rgba(212, 175, 110, 0.12), transparent 60%);
+			animation: glow 10s ease-in-out infinite;
 			pointer-events: none;
 		}
 
-		@keyframes moveGlow {
+		@keyframes glow {
 
 			0%,
 			100% {
-				transform: translate(-10%, -10%);
+				transform: translate(-5%, -5%);
+				opacity: 0.4;
 			}
 
 			50% {
-				transform: translate(10%, 10%);
+				transform: translate(5%, 5%);
+				opacity: 0.7;
 			}
 		}
 
-		/* ===== MAIN ===== */
+		/* ================= MAIN ENTRY ================= */
+
 		.main {
 			opacity: 0;
 			transform: scale(1.05);
 			filter: blur(10px);
-			animation: pageOpen 1.4s ease forwards;
-			animation-delay: 3s;
+			animation: open 1.4s ease forwards;
+			animation-delay: 2.8s;
 		}
 
-		@keyframes pageOpen {
+		@keyframes open {
 			to {
 				opacity: 1;
 				transform: scale(1);
@@ -131,7 +129,8 @@
 			text-align: center;
 		}
 
-		/* reveal animation */
+		/* ================= REVEAL ================= */
+
 		.logo,
 		.subtitle,
 		h1,
@@ -144,27 +143,27 @@
 		}
 
 		.logo {
-			animation-delay: 3.3s;
+			animation-delay: 3.2s;
 		}
 
 		.subtitle {
-			animation-delay: 3.5s;
+			animation-delay: 3.4s;
 		}
 
 		h1 {
-			animation-delay: 3.7s;
+			animation-delay: 3.6s;
 		}
 
 		.text {
-			animation-delay: 3.9s;
+			animation-delay: 3.8s;
 		}
 
 		.player {
-			animation-delay: 4.1s;
+			animation-delay: 4.0s;
 		}
 
 		.footer {
-			animation-delay: 4.3s;
+			animation-delay: 4.2s;
 		}
 
 		@keyframes reveal {
@@ -174,22 +173,28 @@
 			}
 		}
 
-		/* ===== UI ===== */
+		/* ================= UI ================= */
+
 		.logo {
-			width: 72px;
-			height: 72px;
+			width: 74px;
+			height: 74px;
 			margin: 0 auto 40px;
 			border-radius: 50%;
-			border: 1px solid rgba(201, 167, 92, 0.3);
+			border: 1px solid rgba(212, 175, 110, 0.4);
+			background: rgba(255, 255, 255, 0.02);
+
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			color: #c9a75c;
+
+			color: #d4af6e;
 			font-size: 28px;
+
+			backdrop-filter: blur(12px);
 		}
 
 		.subtitle {
-			color: #c9a75c;
+			color: #d4af6e;
 			letter-spacing: 5px;
 			font-size: 11px;
 			margin-bottom: 18px;
@@ -205,29 +210,37 @@
 		}
 
 		.text {
-			color: rgba(255, 255, 255, 0.72);
+			max-width: 300px;
+			color: rgba(245, 241, 232, 0.75);
 			line-height: 1.9;
 			font-size: 15px;
 			margin-bottom: 40px;
 		}
 
+		/* ================= PLAYER ================= */
+
 		.player {
-			background: rgba(255, 255, 255, 0.04);
-			border: 1px solid rgba(201, 167, 92, 0.18);
-			border-radius: 30px;
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(212, 175, 110, 0.25);
+			border-radius: 26px;
 			padding: 30px;
-			backdrop-filter: blur(25px);
-			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+			backdrop-filter: blur(20px);
+
+			box-shadow:
+				0 20px 60px rgba(0, 0, 0, 0.6),
+				inset 0 1px 1px rgba(255, 255, 255, 0.05);
 		}
 
 		.song-title {
 			font-family: 'Cormorant Garamond', serif;
 			font-size: 30px;
 			margin-bottom: 10px;
+			color: #e7d3a3;
 		}
 
 		.song-desc {
-			color: rgba(255, 255, 255, 0.55);
+			color: rgba(245, 241, 232, 0.6);
 			font-size: 13px;
 			line-height: 1.6;
 			margin-bottom: 20px;
@@ -235,11 +248,14 @@
 
 		audio {
 			width: 100%;
+			filter: sepia(1) saturate(0.6) brightness(0.9);
 		}
+
+		/* ================= FOOTER ================= */
 
 		.footer {
 			margin-top: 45px;
-			color: rgba(255, 255, 255, 0.3);
+			color: rgba(212, 175, 110, 0.35);
 			font-size: 12px;
 			letter-spacing: 4px;
 		}
@@ -265,11 +281,11 @@
 			<h1>Одна<br>песня</h1>
 
 			<div class="text">
-				Я приехал совсем ненадолго.<br>
-				Но иногда даже короткие встречи<br>
-				хочется сохранить чуть дольше.<br><br>
+				Я приехал ненадолго,<br>
+				но захотел оставить тебе что-то,
+				что останется чуть дольше моего приезда.<br><br>
 
-				Поэтому я оставлю тебе одну песню.
+				Эта песня — для тебя.
 			</div>
 
 			<div class="player">
