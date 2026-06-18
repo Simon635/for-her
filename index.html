@@ -4,11 +4,21 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Для тебя</title>
+	<title>For Kira</title>
 
 	<link
 		href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400&display=swap"
 		rel="stylesheet">
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+		<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+			<circle cx='50' cy='50' r='48' fill='black'/>
+			<text x='50' y='56'
+						text-anchor='middle'
+						dominant-baseline='middle'
+						font-size='54'
+						fill='%23c9a75c'
+						font-family='Arial, sans-serif'>♪</text>
+		</svg>">
 
 	<style>
 		* {
@@ -19,37 +29,163 @@
 
 		body {
 			min-height: 100vh;
+			color: #f5f5f5;
+			font-family: 'Inter', sans-serif;
 			background:
 				radial-gradient(circle at top, rgba(201, 167, 92, 0.12), transparent 45%),
 				#090909;
-			color: #f5f5f5;
-			font-family: 'Inter', sans-serif;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			padding: 30px;
+			overflow: hidden;
+		}
+
+		/* ===== INTRO ===== */
+		.intro {
+			position: fixed;
+			inset: 0;
+			background: #000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 999;
+			animation: introFade 3.2s ease forwards;
+		}
+
+		.intro h1 {
+			font-family: 'Cormorant Garamond', serif;
+			font-size: 60px;
+			font-weight: 300;
+			letter-spacing: 5px;
+			color: #c9a75c;
+			opacity: 0;
+			transform: scale(1.2);
+			animation: kiraIn 1.2s ease forwards;
+		}
+
+		@keyframes kiraIn {
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		@keyframes introFade {
+			0% {
+				opacity: 1;
+			}
+
+			70% {
+				opacity: 1;
+			}
+
+			100% {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+
+		/* ===== BACKGROUND GLOW ===== */
+		body::before {
+			content: "";
+			position: fixed;
+			inset: -50%;
+			background: radial-gradient(circle, rgba(201, 167, 92, 0.12), transparent 60%);
+			animation: moveGlow 14s ease-in-out infinite;
+			pointer-events: none;
+		}
+
+		@keyframes moveGlow {
+
+			0%,
+			100% {
+				transform: translate(-10%, -10%);
+			}
+
+			50% {
+				transform: translate(10%, 10%);
+			}
+		}
+
+		/* ===== MAIN ===== */
+		.main {
+			opacity: 0;
+			transform: scale(1.05);
+			filter: blur(10px);
+			animation: pageOpen 1.4s ease forwards;
+			animation-delay: 3s;
+		}
+
+		@keyframes pageOpen {
+			to {
+				opacity: 1;
+				transform: scale(1);
+				filter: blur(0);
+			}
 		}
 
 		.container {
 			width: 100%;
 			max-width: 420px;
 			text-align: center;
-			animation: fadeIn 1.5s ease;
+		}
+
+		/* reveal animation */
+		.logo,
+		.subtitle,
+		h1,
+		.text,
+		.player,
+		.footer {
+			opacity: 0;
+			transform: translateY(20px);
+			animation: reveal 1s ease forwards;
 		}
 
 		.logo {
+			animation-delay: 3.3s;
+		}
+
+		.subtitle {
+			animation-delay: 3.5s;
+		}
+
+		h1 {
+			animation-delay: 3.7s;
+		}
+
+		.text {
+			animation-delay: 3.9s;
+		}
+
+		.player {
+			animation-delay: 4.1s;
+		}
+
+		.footer {
+			animation-delay: 4.3s;
+		}
+
+		@keyframes reveal {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* ===== UI ===== */
+		.logo {
 			width: 72px;
 			height: 72px;
-			border: 1px solid rgba(201, 167, 92, 0.3);
-			border-radius: 50%;
 			margin: 0 auto 40px;
+			border-radius: 50%;
+			border: 1px solid rgba(201, 167, 92, 0.3);
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			color: #c9a75c;
 			font-size: 28px;
-			backdrop-filter: blur(10px);
-			animation: glow 4s ease-in-out infinite;
 		}
 
 		.subtitle {
@@ -72,15 +208,16 @@
 			color: rgba(255, 255, 255, 0.72);
 			line-height: 1.9;
 			font-size: 15px;
-			margin-bottom: 50px;
+			margin-bottom: 40px;
 		}
 
 		.player {
 			background: rgba(255, 255, 255, 0.04);
-			border: 1px solid rgba(201, 167, 92, 0.15);
+			border: 1px solid rgba(201, 167, 92, 0.18);
 			border-radius: 30px;
 			padding: 30px;
-			backdrop-filter: blur(20px);
+			backdrop-filter: blur(25px);
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 		}
 
 		.song-title {
@@ -92,14 +229,12 @@
 		.song-desc {
 			color: rgba(255, 255, 255, 0.55);
 			font-size: 13px;
-			margin-bottom: 25px;
 			line-height: 1.6;
+			margin-bottom: 20px;
 		}
 
 		audio {
 			width: 100%;
-			height: 42px;
-			filter: sepia(1) saturate(0.4) brightness(0.95);
 		}
 
 		.footer {
@@ -108,67 +243,54 @@
 			font-size: 12px;
 			letter-spacing: 4px;
 		}
-
-		@keyframes glow {
-			50% {
-				box-shadow: 0 0 30px rgba(201, 167, 92, 0.15);
-			}
-		}
-
-		@keyframes fadeIn {
-			from {
-				opacity: 0;
-				transform: translateY(20px);
-			}
-
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
 	</style>
 </head>
 
 <body>
 
-	<div class="container">
+	<!-- INTRO -->
+	<div class="intro">
+		<h1>For Kira</h1>
+	</div>
 
-		<div class="logo">♪</div>
+	<!-- MAIN -->
+	<div class="main">
 
-		<div class="subtitle">Небольшой сюрприз</div>
+		<div class="container">
 
-		<h1>Одна<br>песня</h1>
+			<div class="logo">♪</div>
 
-		<div class="text">
+			<div class="subtitle">Небольшой сюрприз</div>
 
-			Я приехал ненадолго,<br>
-			но захотел оставить тебе что-то,
-			что останется чуть дольше моего приезда.<br><br>
-			Эта песня — для тебя.
+			<h1>Одна<br>песня</h1>
 
-		</div>
+			<div class="text">
+				Я приехал совсем ненадолго.<br>
+				Но иногда даже короткие встречи<br>
+				хочется сохранить чуть дольше.<br><br>
 
-		<div class="player">
-
-			<div class="song-title">
-				Для тебя
+				Поэтому я оставлю тебе одну песню.
 			</div>
 
-			<div class="song-desc">
-				Несколько мыслей, которые лучше звучат в музыке
+			<div class="player">
+
+				<div class="song-title">Для тебя</div>
+
+				<div class="song-desc">
+					Несколько минут музыки и немного того,<br>
+					что проще услышать, чем сказать
+				</div>
+
+				<audio controls>
+					<source src="song.mp3" type="audio/mpeg">
+				</audio>
+
 			</div>
 
-			<!-- СЮДА ДОБАВЬ СВОЙ ФАЙЛ -->
-			<!-- Положи song.mp3 рядом с этим HTML -->
-			<audio controls>
-				<source src="song.mp3" type="audio/mpeg">
-				Ваш браузер не поддерживает аудио.
-			</audio>
+			<div class="footer">
+				Summer 2026
+			</div>
 
-		</div>
-
-		<div class="footer">
-			ИЮНЬ 2026
 		</div>
 
 	</div>
